@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import connectDb from "./config/db.js";
 import surveyRoutes from "./routes/surveyRoutes.js";
 import responseRoutes from "./routes/responseRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.get("/api/health", (req, res) => {
 
 app.use("/api/surveys", surveyRoutes);
 app.use("/api/surveys", responseRoutes);
+app.use("/api/auth", authRoutes);
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;

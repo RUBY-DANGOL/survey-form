@@ -4,16 +4,17 @@ A full-stack survey platform that lets admins build dynamic surveys with conditi
 
 ## What This App Does
 - Admins build surveys with dynamic questions and optional conditional logic.
-- Users fill out surveys at a public link and submit responses.
-- Admins view analytics per question.
+- Users fill out surveys at a public link and submit responses (no login required).
+- Admins view analytics per question with chart-style summaries.
 
 ## Features
-- Admin dashboard to create, edit, delete, and manage surveys
+- Admin dashboard to create, edit, delete, and manage surveys (JWT login)
 - Dynamic question types: text, single choice, multi-select, rating (1-5)
 - Conditional logic for showing questions based on previous answers
 - Public survey pages with validation and cute success flow
-- Analytics dashboard with per-question insights
+- Analytics dashboard with per-question insights and mini charts
 - RESTful API with MongoDB persistence
+- Public link copy action from the admin dashboard
 
 ## Tech Stack
 **Frontend:** React (Vite), JavaScript, Tailwind CSS, React Router, Axios
@@ -29,7 +30,9 @@ A full-stack survey platform that lets admins build dynamic surveys with conditi
 2. Install dependencies: `npm install`
 3. Create a `.env` file using the example:
    - Copy `backend/.env.example` to `backend/.env`
-4. Start the server: `npm run dev`
+4. Set admin credentials in `.env`:
+  - `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `JWT_SECRET`
+5. Start the server: `npm run dev`
 
 The backend runs on `http://localhost:5000` by default.
 
@@ -41,7 +44,7 @@ The backend runs on `http://localhost:5000` by default.
 The frontend runs on `http://localhost:5173` by default.
 
 ## How It Works (High Level)
-1. Admin creates a survey in the dashboard.
+1. Admin logs in and creates a survey in the dashboard.
 2. Survey structure is stored in MongoDB (`surveys` collection).
 3. Public users submit responses via `/survey/:id`.
 4. Responses are stored in MongoDB (`responses` collection).
@@ -90,10 +93,15 @@ dynamic-survey-builder/
 ### Analytics API
 - `GET /api/surveys/:id/analytics`
 
+### Auth APIs
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+
 ## Architecture Decisions
 - Use a clean separation between controllers, routes, models, and middleware for scalability.
 - Store answers as arrays of `{ questionId, value }` to keep responses flexible for dynamic forms.
 - Implement conditional logic both on the frontend (rendering) and backend (validation).
+- Protect admin routes with JWT middleware, while keeping public survey routes open.
 
 ## Database Architecture
 
@@ -127,6 +135,7 @@ dynamic-survey-builder/
 
 ## Request Flow (Simple)
 ```
+Admin UI -> POST /api/auth/login -> JWT token
 Admin UI -> POST /api/surveys -> MongoDB (surveys)
 Public UI -> POST /api/surveys/:id/responses -> MongoDB (responses)
 Admin UI -> GET /api/surveys/:id/analytics -> aggregated results
@@ -164,21 +173,22 @@ Admin UI -> GET /api/surveys/:id/analytics -> aggregated results
 - `value`: mixed
 
 ## Assumptions
-- Single admin role (no authentication in this baseline).
+- Single admin role (username/password stored in `.env`).
 - Surveys are publicly accessible via ID links.
 - Conditional logic uses a simple equals operator.
 
 ## Trade-offs
-- No authentication to keep the demo focused and fast to evaluate.
+- Single admin credential (no multi-user system).
 - Minimal UI iconography without external assets to stay lightweight.
 
 ## Known Limitations
 - Conditional logic uses exact match only.
 - No survey versioning or draft states.
 - Basic validation only; no internationalization.
+- JWT token stored in localStorage (simple implementation for demo use).
 
 ## Future Improvements
-- JWT authentication and admin roles
+- Multi-user admin roles and password reset flow
 - Rate limiting and spam protection
 - Save partial responses
 - Survey versioning and revisions

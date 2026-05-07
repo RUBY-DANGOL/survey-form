@@ -1,5 +1,6 @@
 import express from "express";
 import validateSurvey from "../middleware/validateSurvey.js";
+import auth from "../middleware/auth.js";
 import {
   createSurvey,
   deleteSurvey,
@@ -11,11 +12,11 @@ import {
 
 const router = express.Router();
 
-router.get("/", getSurveys);
-router.post("/", validateSurvey, createSurvey);
+router.get("/", auth, getSurveys);
+router.post("/", auth, validateSurvey, createSurvey);
 router.get("/:id", getSurveyById);
-router.put("/:id", validateSurvey, updateSurvey);
-router.delete("/:id", deleteSurvey);
-router.get("/:id/analytics", getSurveyAnalytics);
+router.put("/:id", auth, validateSurvey, updateSurvey);
+router.delete("/:id", auth, deleteSurvey);
+router.get("/:id/analytics", auth, getSurveyAnalytics);
 
 export default router;

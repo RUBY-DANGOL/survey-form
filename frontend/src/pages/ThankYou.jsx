@@ -15,9 +15,6 @@ const ThankYou = () => {
           <Link to={`/survey/${id}`}>
             <Button type="button" variant="secondary">Submit Another</Button>
           </Link>
-          <Link to="/admin">
-            <Button type="button">Back to Admin</Button>
-          </Link>
         </div>
       </div>
     </div>
