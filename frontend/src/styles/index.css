@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Quicksand:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply font-body bg-cream text-slate-800;
+}
+
+.app-bg {
+  background-image:
+    var(--app-bg),
+    radial-gradient(circle at 20% 20%, rgba(205, 180, 255, 0.45), transparent 40%),
+    radial-gradient(circle at 80% 10%, rgba(244, 182, 216, 0.35), transparent 35%),
+    radial-gradient(circle at 10% 80%, rgba(189, 224, 254, 0.4), transparent 40%),
+    linear-gradient(135deg, rgba(255, 248, 231, 0.9), rgba(255, 214, 165, 0.4));
+  background-size: 420px, auto, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center, center, center;
+  min-height: 100vh;
+}
+
+.sticker {
+  @apply rounded-2xl border border-white/70 bg-white/80 p-3 shadow-soft;
+}
+
+.section-card {
+  @apply rounded-2xl bg-white/80 shadow-soft backdrop-blur-sm;
+}
+
+.input-base {
+  @apply w-full rounded-xl border border-lavender/40 bg-white/70 px-4 py-2 text-sm shadow-sm focus:border-deep focus:outline-none focus:ring-2 focus:ring-lavender/60;
+}
+
+.button-primary {
+  @apply rounded-full bg-deep px-5 py-2 text-sm font-semibold text-cream shadow-glow transition hover:-translate-y-0.5 hover:bg-deep/90;
+}
+
+.button-secondary {
+  @apply rounded-full border border-deep/40 bg-white/70 px-5 py-2 text-sm font-semibold text-deep shadow-sm transition hover:-translate-y-0.5 hover:bg-cream;
+}
+
+.card-outline {
+  @apply rounded-2xl border border-lavender/40 bg-white/70 shadow-soft;
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full bg-baby/60 px-3 py-1 text-xs font-semibold text-deep;
+}
