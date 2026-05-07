@@ -200,7 +200,10 @@ Admin UI -> GET /api/surveys/:id/analytics -> aggregated results
 - **Database integration:** MongoDB, Mongoose
 - **API testing/debugging:** MongoDB Compass, browser dev tools
 
-## Links (Placeholders)
-- GitHub repository: [REPLACE_WITH_REPO_URL]
-- Live URL: [REPLACE_WITH_LIVE_URL]
-- Demo video: [REPLACE_WITH_DEMO_VIDEO_URL]
+## Link and demo video
+- Live URL: [[Live website]](https://surveyform-sooty.vercel.app/)
+- Demo video: 
+
+https://github.com/user-attachments/assets/7098f09d-a9a7-41a9-9678-c27e23973264
+
+
